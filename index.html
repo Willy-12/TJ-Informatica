@@ -219,14 +219,42 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', e => { const d=a.getAttribute('href'); if(d.startsWith('#')){e.preventDefault();document.querySelector(d).scrollIntoView({behavior:'smooth'})}})});
-        document.getElementById('formWhatsApp').addEventListener('submit',e=>{
-            e.preventDefault();
-            const n=this.querySelector('input[type="text"]').value,c=this.querySelector('input[type="email"]').value,t=this.querySelector('input[type="tel"]').value,m=this.querySelector('textarea').value;
-            window.open(`https://wa.me/543885390558?text=${encodeURIComponent('*Consulta Web TJ Informática*\n\nNombre: '+n+'\nCorreo: '+c+'\nTeléfono: '+t+'\nMensaje: '+m)}`,'_blank');
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Desplazamiento suave para enlaces internos
+    document.querySelectorAll('a[href^="#"]').forEach(enlace => {
+        enlace.addEventListener('click', e => {
+            const destino = enlace.getAttribute('href');
+            if (destino.startsWith('#')) {
+                e.preventDefault();
+                document.querySelector(destino).scrollIntoView({ behavior: 'smooth' });
+            }
         });
-    </script>
+    });
+
+    // Formulario de WhatsApp CORREGIDO y funcional
+    document.getElementById('formWhatsApp').addEventListener('submit', function(e) {
+        e.preventDefault(); // Evita recargar la página
+
+        // Tomamos los valores de cada campo
+        const nombre = document.querySelector('input[placeholder="Nombre completo"]').value.trim();
+        const correo = document.querySelector('input[placeholder="Correo electrónico"]').value.trim();
+        const telefono = document.querySelector('input[placeholder="Teléfono / WhatsApp"]').value.trim();
+        const mensaje = document.querySelector('textarea[placeholder="Descripción del problema o consulta"]').value.trim();
+
+        // Texto formateado para WhatsApp
+        const textoMensaje = `*Consulta desde la web TJ Informática*%0A%0A` +
+                             `• Nombre: ${encodeURIComponent(nombre)}%0A` +
+                             `• Correo: ${encodeURIComponent(correo)}%0A` +
+                             `• Teléfono/WhatsApp: ${encodeURIComponent(telefono)}%0A` +
+                             `• Mensaje: ${encodeURIComponent(mensaje)}`;
+
+        // Número CORRECTO: código país + número sin espacios
+        const numeroDestino = '543885390558';
+
+        // Abrimos el chat de WhatsApp
+        window.open(`https://wa.me/${numeroDestino}?text=${textoMensaje}`, '_blank');
+    });
+</script>
 </body>
 </html>
