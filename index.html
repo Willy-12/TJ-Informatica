@@ -215,6 +215,19 @@
                 <a href="mapa.html">Mapa del Sitio</a>
             </div>
             <p> </p>
+
+            <!-- Contador de Visitas - TJ Informática -->
+<div style="margin-top: 12px; padding-top: 10px; font-size: 0.9rem; color: #4A90E2; text-align: center;">
+    👀 Visitas: <strong id="contador-visitantes">0</strong>
+</div>
+
+<script>
+    // Recuperamos o iniciamos el contador
+    let total = localStorage.getItem('contador') ? parseInt(localStorage.getItem('contador')) + 1 : 1;
+    localStorage.setItem('contador', total);
+    document.getElementById('contador-visitantes').textContent = total;
+</script>
+            
             <div class="copyright">&copy; 2026 TJ Informática. Todos los derechos reservados. Barrio Cuyaya, San Salvador de Jujuy – Argentina.</div>
         </div>
     </footer>
